@@ -1,12 +1,16 @@
 import { useState } from "react";
 
-export default function Autocomplete({ countries: data }) {
-    const [suggestions, setSuggestions] = useState([]);
+interface Props {
+    countries: string[];
+}
+
+export default function Autocomplete({ countries: data }: Props) {
+    const [suggestions, setSuggestions] = useState<string[]>([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);
     const [suggestionsActive, setSuggestionsActive] = useState(false);
     const [value, setValue] = useState("");
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value.toLowerCase();
         setValue(query);
         if (query.length > 1) {
@@ -20,13 +24,13 @@ export default function Autocomplete({ countries: data }) {
         }
     };
 
-    const handleClick = (e) => {
+    const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
         setSuggestions([]);
-        setValue(e.target.innerText);
+        setValue(e.currentTarget.innerText);
         setSuggestionsActive(false);
     };
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         // UP ARROW
         if (e.keyCode === 38) {
             if (suggestionIndex === 0) {
@@ -72,7 +76,7 @@ export default function Autocomplete({ countries: data }) {
         <>
             <div className="autocomplete-field">
                 <h3>
-                    <strong data-cy="heading">Search your country:</strong>
+                    <strong data-cy="heading">Recherchez votre pays :</strong>
                 </h3>
                 <input
                     type="text"
@@ -80,7 +84,7 @@ export default function Autocomplete({ countries: data }) {
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                     style={{ border: "1px solid #000" }}
-                    placeholder="Type a country name"
+                    placeholder="Tapez un nom de pays"
                 />
                 {suggestionsActive && <Suggestions />}
             </div>
