@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Props {
     countries: string[];
 }
 
-export default function Autocomplete({ countries: data }: Props) {
+export default function Autocomplete({ countries: data }: Props): JSX.Element {
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);
     const [suggestionsActive, setSuggestionsActive] = useState(false);
