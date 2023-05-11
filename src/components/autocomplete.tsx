@@ -76,7 +76,7 @@ export default function Autocomplete({ countries: data }: Props): JSX.Element {
         <>
             <div className="autocomplete-field">
                 <h3>
-                    <strong data-cy="heading">Recherchez votre pays :</strong>
+                    <strong data-cy="heading">Search your country</strong>
                 </h3>
                 <input
                     type="text"
